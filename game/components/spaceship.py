@@ -22,11 +22,13 @@ class Spaceship(Sprite):#entre los parentesis se pone la clase de la que se quie
              self.move_down()
 
      def move_left(self):
-         if self.rect.left > 0:
-             self.rect.x -= 10
+         self.rect.x -= 10
+         if self.rect.right < 0:  # SI LA NAVE ESTA LOCALIZADA EN 0 SOBRE EL EJE X SU LOCALIZACION SERA IGUAL AL ANCHO DE LA PANTALLA
+             self.rect.left = SCREEN_WIDTH
      def move_right(self):
-         if self.rect.right < SCREEN_WIDTH:
-             self.rect.x +=10
+         self.rect.x +=10
+         if self.rect.left > SCREEN_WIDTH:  #SI LA NAVE ESTA LOCALIZADA AL TOTAL DEL ANCHO EN EL EJE X SU NUEVA LOCALIZACION SERA IGUAL A 0
+             self.rect.right = 0
      def move_up(self):
          if self.rect.y > SCREEN_HEIGHT //2:
              self.rect.y -=10
