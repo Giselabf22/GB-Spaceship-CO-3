@@ -1,4 +1,5 @@
 import pygame
+from game.components.enemies.enemy_manager import EnemyManager
 from game.components.spaceship import Spaceship
 
 from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE #lo que no se esta usando se ve de un color mas opaco
@@ -15,7 +16,8 @@ class Game:
         self.game_speed = 10
         self.x_pos_bg = 0   #bg es el back ground
         self.y_pos_bg = 0
-        self.player = Spaceship() 
+        self.player = Spaceship()
+        self.enemy_manager = EnemyManager() 
 
     def run(self):
         # Game loop: events - update - draw
@@ -35,12 +37,14 @@ class Game:
     def update(self):
         user_input = pygame.key.get_pressed() #da como un diccionario de todas las teclas y lo que se ha presionado da un valor
         self.player.update(user_input)
+        self.enemy_manager.update()
 
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255)) #fill rellena de un color la pantalla
         self.draw_background()
         self.player.draw(self.screen)
+        self.enemy_manager.draw(self.screen)
         pygame.display.update() #estos dos sirven para que el usuario note los cambios
         pygame.display.flip()
 
