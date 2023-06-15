@@ -2,7 +2,7 @@ import pygame   #importaciones
 import random
 from pygame.sprite import Sprite
 
-from game.utils.constants import ENEMY_1, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import ENEMY_1, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH 
 
 
 LEFT = 'left'  #definicion de constantes
@@ -27,10 +27,11 @@ class Enemy(Sprite):   #definicion de clase La clase Enemy hereda de Sprite, lo 
         self.movement = random.choice(self.MOVEMENTS)
         self.move_x = random.randint(30, 100) #establece un numero de movimientos que se van a hacer.
         self.moving_index = 0 #Esta variable se utiliza para realizar un seguimiento de la cantidad de movimientos que ha realizado el enemigo en una dirección específica. Se incrementará a medida que el enemigo se mueva y se reiniciará cuando alcance el valor de self.move_x.
+        self.shooting_time =  random.randint()
 
-
-    def update(self, ships): #metodo  se encarga de actualizar la posición y el movimiento del enemigo en cada fotograma del juego.
+    def update(self, ships, game): #metodo  se encarga de actualizar la posición y el movimiento del enemigo en cada fotograma del juego.
         self.rect.y += self.speed_y
+        self.shoot(game.bullet_manager)
 
         if self.movement == LEFT:
             self.rect.x -= self.speed_x
@@ -57,3 +58,10 @@ class Enemy(Sprite):   #definicion de clase La clase Enemy hereda de Sprite, lo 
 #blit de pygame para dibujar la imagen del enemigo en la posición definida por self.rect.x y self.rect.y.
 
         # "argumento" se refiere a los valores que se pasan a un método o función cuando se llama a ese método o función. Los argumentos proporcionan información o datos necesarios para que el método o función realice ciertas operaciones.
+
+    def shoot(self, bullet_manager):
+        current_time = pygame.time.get_ticks()
+        if self.shooting_time <= current_time:
+            bullet = Bullet(self)
+            bullet_manager.add_bullet(bullet)
+            self.shooting_time += random.randint(30, 50)
