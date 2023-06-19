@@ -32,5 +32,6 @@ BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 
-FONT_STYLE = 'freesansbold.ttf'
+FONT_STYLE = 'game/assets/font/SuperMario256.ttf'
+
     
