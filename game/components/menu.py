@@ -28,7 +28,7 @@ class Menu:
 
         pygame.mixer.music.load('game/assets/music/menu_song.mp3')
         pygame.mixer.music.set_volume(0.5)
-        pygame.mixer.music.play(-1)
+        pygame.mixer.music.play(-1) #indica que la musica se repetira en bucle
 
     def event(self, on_close, on_start, user_input):
         # Maneja los eventos del menú
